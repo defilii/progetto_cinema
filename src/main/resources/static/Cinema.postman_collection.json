@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "a6abe04f-8168-4d35-985c-c8d4e103fcff",
+		"name": "Cinema",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29730351"
+	},
+	"item": [
+		{
+			"name": "getAllFilm",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "http://localhost:8081/api/cinema/get-all"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cinema",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "http://localhost:8081/api/cinema/getAll"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all films",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "http://localhost:8081/api/film/getAll"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Sala",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "Get All Sala"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Incassi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/api/cinema/getIncassi-1"
+			},
+			"response": []
+		},
+		{
+			"name": "Caso Film Vietato ai minori",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "http://localhost:8081/api/sale/add-spettatore-3-to-6"
+			},
+			"response": []
+		},
+		{
+			"name": "Caso Sala al Completo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://localhost:8081/api/sale/add-spettatore-2-to-1"
+			},
+			"response": []
+		},
+		{
+			"name": "Svuota sala",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://localhost:8081/api/sale/svuota-sala/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all spettatori",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "Get all spettatori"
+			},
+			"response": []
+		},
+		{
+			"name": "Biglietto anziano sopra i 70",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"posizione\": \"string\",\r\n    \"prezzo\": 5,\r\n    \"spettatore\": {\r\n      \"id\": 1\r\n    },\r\n    \"film\": {\r\n      \"id\": 2\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/biglietti/insert"
+			},
+			"response": []
+		},
+		{
+			"name": "Biglietto di bambino sotto i 5 anni",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"posizione\": \"string\",\r\n    \"prezzo\": 5,\r\n    \"spettatore\": {\r\n      \"id\": 2\r\n    },\r\n    \"film\": {\r\n      \"id\": 2\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/biglietti/insert"
+			},
+			"response": []
+		}
+	]
+}
