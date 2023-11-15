@@ -1,6 +1,7 @@
 package it.euris.javaacademy.cinema.dto;
 
 import it.euris.javaacademy.cinema.dto.archetype.Dto;
+import it.euris.javaacademy.cinema.entity.Film;
 import it.euris.javaacademy.cinema.entity.SalaCinematografica;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,8 +23,8 @@ public class SalaCinematograficaDto implements Dto {
                 .id(id)
                 .incassi(incassi)
                 .sedie(sedie)
+                .film(null == film ? null : film.toModel())
                 .cinema(cinema.toModel())
-                .film(film.toModel())
                 .build();
     }
 }

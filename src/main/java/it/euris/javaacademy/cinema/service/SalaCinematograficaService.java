@@ -15,4 +15,7 @@ public interface SalaCinematograficaService {
 
     SalaCinematografica findById(Integer idSalaCinematografica);
 
+    Boolean svuotaSala(Integer idSalaCinematografica);
+    Boolean aggiungiSpettatore(Integer idSalaCinematografica, Integer idSpettatore);
+
 }

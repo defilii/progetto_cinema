@@ -1,16 +1,12 @@
 package it.euris.javaacademy.cinema.dto;
 
 import it.euris.javaacademy.cinema.dto.archetype.Dto;
-import it.euris.javaacademy.cinema.dto.archetype.Model;
 import it.euris.javaacademy.cinema.entity.Spettatore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @Getter
@@ -29,7 +25,7 @@ public class SpettatoreDto implements Dto {
                 .dataNascita(dataNascita)
                 .nome(nome)
                 .cognome(cognome)
-                .salaCinematografica(salaCinematografica.toModel())
+                .salaCinematografica(null == salaCinematografica ? null : salaCinematografica.toModel())
                 .build();
     }
 }

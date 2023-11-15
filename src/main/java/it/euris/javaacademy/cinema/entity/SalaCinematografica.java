@@ -35,7 +35,7 @@ public class SalaCinematografica implements Model {
     private Cinema cinema;
 
     @ManyToOne
-    @JoinColumn(name="film_id", nullable=false)
+    @JoinColumn(name="film_id", nullable=true)
     private Film film;
 
     @OneToMany(mappedBy = "salaCinematografica", fetch = FetchType.EAGER)
@@ -48,7 +48,7 @@ public class SalaCinematografica implements Model {
                 .id(id)
                 .sedie(sedie)
                 .incassi(incassi)
-                .film(film.toDto())
+                .film(null == film ? null  : film.toDto())
                 .cinema(cinema.toDto())
                 .build();
     }

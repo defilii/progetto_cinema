@@ -36,7 +36,7 @@ public class Film implements Model {
     @Column(name = "eta_minima", nullable=false)
     private Integer etaMinima;
     @Column(name = "durata", nullable=false)
-    private String durata;
+    private Integer durata;
 
     @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
     @JsonIgnore
@@ -44,6 +44,14 @@ public class Film implements Model {
 
     @Override
     public FilmDto toDto() {
-        return FilmDto.builder().build();
+        return FilmDto.builder()
+                .titolo(titolo)
+                .id(id)
+                .autore(autore)
+                .durata(durata)
+                .etaMinima(etaMinima)
+                .genere(genere)
+                .produttore(produttore)
+                .build();
     }
 }

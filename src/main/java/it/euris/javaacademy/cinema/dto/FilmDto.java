@@ -20,7 +20,7 @@ public class FilmDto implements Dto {
     String autore;
     String produttore;
     Integer etaMinima;
-    String durata;
+    Integer durata;
 
     @Override
     public Film toModel() {

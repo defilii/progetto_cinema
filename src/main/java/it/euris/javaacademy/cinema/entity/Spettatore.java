@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name = "spettatore")
 public class Spettatore implements Model {
 
@@ -35,7 +36,7 @@ public class Spettatore implements Model {
     private LocalDateTime dataNascita;
 
     @ManyToOne
-    @JoinColumn(name="sala_cinematograficaid", nullable=false)
+    @JoinColumn(name="sala_cinematografica_id", nullable=true)
     private SalaCinematografica salaCinematografica;
 
     @OneToMany(mappedBy = "spettatore", fetch = FetchType.EAGER)
@@ -49,7 +50,11 @@ public class Spettatore implements Model {
                 .cognome(cognome)
                 .id(id)
                 .dataNascita(dataNascita)
-                .salaCinematografica(salaCinematografica.toDto())
+                .salaCinematografica(null == salaCinematografica ? null : salaCinematografica.toDto())
                 .build();
+    }
+
+    public Integer getAnni() {
+        return LocalDateTime.now().getYear() - dataNascita.getYear();
     }
 }
