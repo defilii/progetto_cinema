@@ -15,4 +15,5 @@ public interface BigliettoService {
 
     Biglietto findById(Integer idBiglietto);
 
+    String applySale(Integer idBiglietto);
 }

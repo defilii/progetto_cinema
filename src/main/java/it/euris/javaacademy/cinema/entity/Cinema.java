@@ -35,4 +35,10 @@ public class Cinema implements Model {
                 .nome(nome)
                 .build();
     }
+
+    public Double incassiTotali(){
+        return saleCinematografiche.stream()
+                .map(SalaCinematografica::getIncassi)
+                .reduce(0.0, Double::sum);
+    }
 }

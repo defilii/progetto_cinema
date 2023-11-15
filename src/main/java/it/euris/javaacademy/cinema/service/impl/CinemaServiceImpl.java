@@ -1,6 +1,7 @@
 package it.euris.javaacademy.cinema.service.impl;
 
 import it.euris.javaacademy.cinema.entity.Cinema;
+import it.euris.javaacademy.cinema.entity.SalaCinematografica;
 import it.euris.javaacademy.cinema.exceptions.IdMustBeNullException;
 import it.euris.javaacademy.cinema.exceptions.IdMustNotBeNullException;
 import it.euris.javaacademy.cinema.repository.CinemaRepository;

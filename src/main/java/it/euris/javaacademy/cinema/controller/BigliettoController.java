@@ -4,6 +4,7 @@ import it.euris.javaacademy.cinema.dto.BigliettoDto;
 import it.euris.javaacademy.cinema.entity.Biglietto;
 import it.euris.javaacademy.cinema.exceptions.IdMustBeNullException;
 import it.euris.javaacademy.cinema.exceptions.IdMustNotBeNullException;
+import it.euris.javaacademy.cinema.exceptions.NessunScontoDisponibile;
 import it.euris.javaacademy.cinema.service.BigliettoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,28 @@ public class BigliettoController {
 
     BigliettoService bigliettoService;
     @GetMapping("/getAll")
-    public List<BigliettoDto> getAllBigliettos() {
+    public List<BigliettoDto> getAllBiglietti() {
         return bigliettoService.findAll().stream().map(Biglietto::toDto).toList();
     }
 
     @PostMapping("/insert")
     public BigliettoDto saveBiglietto(@RequestBody BigliettoDto bigliettoDTO) {
         try {
-            Biglietto Biglietto = bigliettoDTO.toModel();
-            return bigliettoService.insert(Biglietto).toDto();
+            Biglietto biglietto = bigliettoDTO.toModel();
+            BigliettoDto bigliettoDto = bigliettoService.insert(biglietto).toDto();
+            bigliettoService.applySale(biglietto.getId());
+            return bigliettoService.findById(bigliettoDto.getId()).toDto();
         } catch (IdMustBeNullException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping("/getSconto-{id}")
+    public String getSale(@PathVariable("id") Integer idBiglietto) {
+        try {
+       return bigliettoService.applySale(idBiglietto);
+        } catch (NessunScontoDisponibile e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -39,8 +52,8 @@ public class BigliettoController {
     @PutMapping("/update")
     public BigliettoDto updateBiglietto(@RequestBody BigliettoDto bigliettoDTO) {
         try {
-            Biglietto Biglietto = bigliettoDTO.toModel();
-            return bigliettoService.update(Biglietto).toDto();
+            Biglietto biglietto = bigliettoDTO.toModel();
+            return bigliettoService.update(biglietto).toDto();
         } catch (IdMustNotBeNullException e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getMessage());

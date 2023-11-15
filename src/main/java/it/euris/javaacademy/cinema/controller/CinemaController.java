@@ -23,6 +23,11 @@ public class CinemaController {
         return cinemaService.findAll().stream().map(Cinema::toDto).toList();
     }
 
+    @GetMapping("/getIncassi-{id}")
+    public Double getIncassiTotali(@PathVariable("id") Integer idCinema) {
+        return cinemaService.findById(idCinema).incassiTotali();
+    }
+
     @PostMapping("/insert")
     public CinemaDto saveCinema(@RequestBody CinemaDto cinemaDto) {
         try {
