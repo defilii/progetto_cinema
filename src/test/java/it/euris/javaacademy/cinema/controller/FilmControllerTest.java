@@ -1,8 +1,9 @@
-package it.euris.javaacademy.cinema;
+package it.euris.javaacademy.cinema.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.euris.javaacademy.cinema.entity.Film;
 import it.euris.javaacademy.cinema.service.FilmService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,13 +15,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class FilmControllerTest {
@@ -35,13 +34,13 @@ public class FilmControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @DisplayName("GIVEN only one film inside the db WHEN find all THEN should get it")
     void shouldGetOneFilm() throws Exception {
-
+        //arrange
         Film film = Film.builder().build();
         List<Film> films = List.of(film);
-
         when(filmService.findAll()).thenReturn(films);
-
+        //act+assert
         mockMvc.perform(MockMvcRequestBuilders.get("/film/getAll"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -53,13 +52,13 @@ public class FilmControllerTest {
     }
 
     @Test
+    @DisplayName("GIVEN a film not inside the db WHEN inserting THEN should insert")
     void shouldInsertAFilm() throws Exception {
-
+        //arrange
         Film film = Film.builder().build();
         List<Film> films = List.of(film);
-
         when(filmService.insert(any())).thenReturn(film);
-
+        //act+assert
         mockMvc.perform(post("/film/insert")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
