@@ -27,6 +27,10 @@ public class Biglietto implements Model {
     @JoinColumn(name="spettatore_id", nullable=false)
     private Spettatore spettatore;
 
+    @ManyToOne
+    @JoinColumn(name="film_id", nullable=false)
+    private Film film;
+
     @Override
     public BigliettoDto toDto() {
         return BigliettoDto.builder()
@@ -35,6 +39,7 @@ public class Biglietto implements Model {
                 .posizione(posizione)
                 .prezzo(prezzo)
                 .spettatore(spettatore.toDto())
+                .film(film.toDto())
                 .build();
     }
 }

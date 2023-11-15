@@ -42,6 +42,10 @@ public class Film implements Model {
     @JsonIgnore
     private List<SalaCinematografica> saleCinematografiche = new ArrayList<>();
 
+    @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Biglietto> biglietti = new ArrayList<>();
+
     @Override
     public FilmDto toDto() {
         return FilmDto.builder()

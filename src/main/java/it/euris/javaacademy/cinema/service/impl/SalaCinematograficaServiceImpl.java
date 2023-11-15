@@ -1,5 +1,6 @@
 package it.euris.javaacademy.cinema.service.impl;
 
+import it.euris.javaacademy.cinema.entity.Biglietto;
 import it.euris.javaacademy.cinema.entity.SalaCinematografica;
 import it.euris.javaacademy.cinema.entity.Spettatore;
 import it.euris.javaacademy.cinema.exceptions.*;
@@ -78,11 +79,25 @@ public class SalaCinematograficaServiceImpl implements SalaCinematograficaServic
         if (salaCinematografica.getFilm().getEtaMinima() >= spettatore.getAnni()) {
             throw new FilmVietatoAiMinori();
         }
+        if (spettatore.getBiglietti().isEmpty() || !spettatore.getBiglietti()
+                .stream()
+                .map(Biglietto::getFilm)
+                .anyMatch(film -> salaCinematografica.getFilm().equals(film))) {
+            throw new SpettatoreNonPossiedeBiglietto();
+        }
         if (salaCinematografica.getSedie() == salaCinematografica.getSpettatori().size()) {
             throw new SalaAlCompleto();
         }
         spettatori.add(spettatore);
         salaCinematografica.setSpettatori(spettatori);
+        Double incasso = spettatore.getBiglietti().stream()
+                .filter(biglietto ->
+                        biglietto.getFilm()
+                                .equals(salaCinematografica.getFilm()))
+                .findFirst()
+                .get()
+                .getPrezzo();
+        salaCinematografica.aggiungiIncasso(incasso);
         salaCinematograficaRepository.save(salaCinematografica);
 
         spettatore.setSalaCinematografica(salaCinematografica);

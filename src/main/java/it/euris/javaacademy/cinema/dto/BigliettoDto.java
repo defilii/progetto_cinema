@@ -18,6 +18,7 @@ public class BigliettoDto implements Dto {
     String posizione;
     Double prezzo;
     SpettatoreDto spettatore;
+    FilmDto film;
 
     @Override
     public Biglietto toModel() {
@@ -26,6 +27,7 @@ public class BigliettoDto implements Dto {
                 .posizione(posizione)
                 .prezzo(prezzo)
                 .spettatore(spettatore.toModel())
+                .film(null == film? null : film.toModel())
                 .build();
     }
 }

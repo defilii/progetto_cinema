@@ -42,6 +42,10 @@ public class SalaCinematografica implements Model {
     @JsonIgnore
     private List<Spettatore> spettatori = new ArrayList<>();
 
+    public void aggiungiIncasso(Double incasso) {
+        incassi = incassi + incasso;
+    }
+
     @Override
     public SalaCinematograficaDto toDto() {
         return SalaCinematograficaDto.builder()
